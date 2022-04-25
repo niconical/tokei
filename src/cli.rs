@@ -54,7 +54,7 @@ pub struct Cli {
 
 impl Cli {
     pub fn from_args() -> Self {
-        let matches = clap::App::new("tokei")
+        let matches = clap::Command::new("tokei")
             .version(&*crate_version())
             .author("Erin P. <xampprocky@gmail.com> + Contributors")
             .about(concat!(
@@ -85,7 +85,7 @@ impl Cli {
                 Arg::new("files")
                     .long("files")
                     .short('f')
-                    .help("Will print out statistics on individual files."),
+                    .help("Will print out statistics o individual files."),
             )
             .arg(
                 Arg::new("file_input")
@@ -310,7 +310,8 @@ impl Cli {
 
     pub fn print_supported_languages() {
         for (key, extensions) in LanguageType::list() {
-            println!("{} ({})", format!("{}", key), extensions.join(", "));
+            // println!("{} ({})", format!("{}", key), extensions.join(", "));
+            println!("{} ({})", key, extensions.join(", "));
         }
     }
 
@@ -363,7 +364,8 @@ impl Cli {
                 println!(
                     "{:>10} {:<80} {:>12} {:>12} {:>12} {:>12}",
                     l.name(),
-                    e.name.to_string_lossy().to_string(),
+                    // e.name.to_string_lossy().to_string(),
+                    e.name.to_string_lossy(),
                     e.stats.lines(),
                     e.stats.code,
                     e.stats.comments,
